@@ -1,5 +1,5 @@
-import { combineReducers } from 'react-redux';
-import appReducer from './appReducers';
+import { combineReducers } from 'redux';
+import { appReducer } from './appReducer';
 
 
 export const rootReducer = combineReducers({
