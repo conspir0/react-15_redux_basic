@@ -1,26 +1,27 @@
 import constants from './../constants/appConstants';
 
 
-const addComment = ({ author, comment, rate }) => ({
+export const addComment = ({ author, comment, rate }) => ({
   type: constants.ADD,
   payload: {
     author,
     comment,
-    id: Math.floor(Math.random * 1234567890),
+    id: Math.floor(Math.random() * 1234),
     rate,
   }
 });
 
-const deleteComment = ({ id }) => ({
+export const deleteComment = id => ({
   type: constants.DELETE,
   payload: {
     id
   }
 });
 
-const editComment = ({ comment, id, rate }) => ({
+export const editComment = ({ author, comment, id, rate }) => ({
   type: constants.EDIT,
   payload: {
+    author,
     comment,
     id,
     rate

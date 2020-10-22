@@ -1,4 +1,4 @@
-import { constants } from '../constants/appConstants';
+import constants from '../constants/appConstants';
 
 
 const initialState = [];
@@ -11,23 +11,19 @@ export const appReducer = (state = initialState, action) => {
       return [...state, action.payload];
 
     case DELETE:
-      const { id } = action.payload;
-
-      return state.filter(item => item.id !== id
+      return state.filter(item => item.id !== action.payload.id
       )
 
     case EDIT:
-      const { comment, rate } = action.payload;
-
       return state.map(item => {
-        if (item.id !== id) {
+        if (item.id !== action.payload.id) {
           return state;
         } else {
           return ({
             author: item.author,
-            comment,
+            comment: action.payload.comment,
             id: item.id,
-            rate,
+            rate: action.payload.rate,
           })
         }
       });

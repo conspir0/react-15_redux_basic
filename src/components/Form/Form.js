@@ -1,13 +1,17 @@
 import React from 'react';
 import { useState } from 'react';
+import { connect } from 'react-redux';
+import { addComment, editComment } from './../../actions/appActions';
 
 
 const Form = ({
+  addComment,
   author = '',
   callback,
   comment = '',
+  editComment,
   id,
-  rate = '',
+  rate = 0,
 }) => {
   const [authorInput, setAuthorInput] = useState(author);
   const [commentInput, setCommentInput] = useState(comment);
@@ -27,29 +31,25 @@ const Form = ({
       rate: Number(rateInput),
     };
 
-    console.log(commentObject)
-    id ? console.log('akcja edycji') : console.log('akcja dodania')
+    id ? editComment(commentObject) : addComment(commentObject)
 
-    if (id) {
-      callback();
-    }
+    id && callback();
   }
 
   return (
     <div className="container-form">
       <form onSubmit={handleSubmit}>
-        {id ? null :
-          <label>
-            <div>
-              Author:
+        <label>
+          <div>
+            Author:
           </div>
-            <input
-              onChange={handleChangeAuthor}
-              type="text"
-              value={authorInput}
-            />
-          </label>
-        }
+          <input
+            onChange={handleChangeAuthor}
+            type="text"
+            value={authorInput}
+            disabled={id ? true : false}
+          />
+        </label>
 
         <label>
           <div>
@@ -76,11 +76,18 @@ const Form = ({
         <button
           type="submit"
         >
-          {id ? 'Edit' : 'Add'}
+          Add
         </button>
       </form>
     </div>
   )
 }
 
-export default Form;
+const connectActionsToProps = ({
+  addComment,
+  editComment
+})
+
+const FormConsumer = connect(null, connectActionsToProps)(Form);
+
+export default FormConsumer;
