@@ -4,12 +4,14 @@ import Comment from './../Comment/Comment';
 
 
 const CommentList = ({ comments }) => {
-  const commentList = comments.map((comment, index) => (
-    <Comment
-      key={index}
-      {...comment}
-    />
-  ))
+  const commentList = comments.map(comment => {
+    return (
+      < Comment
+        key={comment.id}
+        {...comment}
+      />
+    )
+  })
 
   return (
     <div className="container-list">

@@ -17,7 +17,7 @@ export const appReducer = (state = initialState, action) => {
     case EDIT:
       return state.map(item => {
         if (item.id !== action.payload.id) {
-          return state;
+          return item;
         } else {
           return ({
             author: item.author,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import { addComment, editComment } from './../../actions/appActions';
+import { addComment, deleteComment, editComment } from './../../actions/appActions';
 
 
 const Form = ({
@@ -9,6 +9,7 @@ const Form = ({
   author = '',
   callback,
   comment = '',
+  deleteComment,
   editComment,
   id,
   rate = 0,
@@ -34,6 +35,10 @@ const Form = ({
     id ? editComment(commentObject) : addComment(commentObject)
 
     id && callback();
+  }
+
+  const handleClickDelete = () => {
+    deleteComment(id)
   }
 
   return (
@@ -76,8 +81,9 @@ const Form = ({
         <button
           type="submit"
         >
-          Add
+          {id ? 'Save' : 'Add'}
         </button>
+        {id && <button onClick={handleClickDelete}>Delete</button>}
       </form>
     </div>
   )
@@ -85,6 +91,7 @@ const Form = ({
 
 const connectActionsToProps = ({
   addComment,
+  deleteComment,
   editComment
 })
 
