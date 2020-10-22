@@ -1,5 +1,6 @@
 import constants from './../constants/appConstants';
 
+
 const addComment = ({ author, comment, rate }) => ({
   type: constants.ADD,
   payload: {
